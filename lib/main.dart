@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:mephi_trello/storage/local_cache.dart';
+import 'package:mephi_trello/storage/local_cache_impl.dart';
 
 import 'DI/DI.dart';
 
-void main() {
+Future main() async {
   GetIt.I.registerSingleton<DI>(DIimpl());
+  SharedPrefs a1 = SharedPrefsImpl();
+  a1.init(await DIimpl().getSharedPrefsInstance());
   runApp(const MyApp());
 }
 
