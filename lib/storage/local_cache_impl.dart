@@ -1,23 +1,23 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'local_cache.dart';
 
 class SharedPrefsImpl implements SharedPrefs {
+
+  late SharedPreferences _instance;
+
   @override
-  Map<String, dynamic> getJson(String path) {
-    // TODO: implement getJson
-    throw UnimplementedError();
+  Map<String, dynamic> getJson(String path) => jsonDecode(_instance.getString(path) ?? '');
+
+  @override
+  void init(SharedPreferences instance) {
+    _instance = instance;
   }
 
   @override
-  Future init(SharedPreferences instance) {
-    // TODO: implement init
-    throw UnimplementedError();
+  void saveJson(String path, Map<String, dynamic> data) {
+    _instance.setString(path, jsonEncode(data));
   }
-
-  @override
-  void saveJson(Map<String, dynamic> data) {
-    // TODO: implement saveJson
-  }
-
 }
