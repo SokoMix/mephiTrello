@@ -2,13 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mephi_trello/storage/local_cache.dart';
 import 'package:mephi_trello/storage/local_cache_impl.dart';
+import 'package:mephi_trello/service/trello_API.dart';
 
 import 'DI/DI.dart';
 
 Future main() async {
-  GetIt.I.registerSingleton<DI>(DIimpl());
+  WidgetsFlutterBinding.ensureInitialized();
+  GetIt.I.registerSingleton(DIimpl());
   SharedPrefs a1 = SharedPrefsImpl();
   a1.init(await DIimpl().getSharedPrefsInstance());
+  TrelloApi api = TrelloApiImpl(GetIt.I<DIimpl>().getDioInstance(null));
+  String login = await api.loginUser({
+    'login': 'Dima',
+    'password': 'Dima',
+  });
+  print(login);
+  print(await api.getProjects());
+
   runApp(const MyApp());
 }
 
