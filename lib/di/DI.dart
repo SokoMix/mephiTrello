@@ -23,7 +23,7 @@ class DIimpl implements DI {
           baseUrl: 'http://10.0.2.2:8000',
           responseType: ResponseType.json,
           contentType: ContentType.json.toString(),
-          headers: {'Authorization': 'Bearer ${token??''}'},
+          headers: {'Authorization': 'Bearer ${token ?? ''}'},
         ),
       );
 

@@ -18,7 +18,6 @@ Future main() async {
   });
   print(login);
   print(await api.getProjects());
-
   runApp(const MyApp());
 }
 
