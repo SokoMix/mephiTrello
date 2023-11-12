@@ -39,6 +39,8 @@ dependencies:
   get_it: ^7.6.4
   dio: ^5.3.3
   firebase_analytics: ^10.5.1
+  freezed: ^2.4.5
+  build_runner: ^2.4.6
 
 dev_dependencies:
   flutter_test:
