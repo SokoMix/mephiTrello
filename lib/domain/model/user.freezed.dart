@@ -20,10 +20,11 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
-  String get id => throw _privateConstructorUsedError;
+  String get user_id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get login => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  List<String> get projects => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,12 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({String id, String name, String login, String password});
+  $Res call(
+      {String user_id,
+      String name,
+      String login,
+      String password,
+      List<String> projects});
 }
 
 /// @nodoc
@@ -51,15 +57,16 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? user_id = null,
     Object? name = null,
     Object? login = null,
     Object? password = null,
+    Object? projects = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      user_id: null == user_id
+          ? _value.user_id
+          : user_id // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -73,6 +80,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      projects: null == projects
+          ? _value.projects
+          : projects // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -84,7 +95,12 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String login, String password});
+  $Res call(
+      {String user_id,
+      String name,
+      String login,
+      String password,
+      List<String> projects});
 }
 
 /// @nodoc
@@ -97,15 +113,16 @@ class __$$UserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? user_id = null,
     Object? name = null,
     Object? login = null,
     Object? password = null,
+    Object? projects = null,
   }) {
     return _then(_$UserImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      user_id: null == user_id
+          ? _value.user_id
+          : user_id // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -119,6 +136,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      projects: null == projects
+          ? _value._projects
+          : projects // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -127,26 +148,37 @@ class __$$UserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserImpl implements _User {
   const _$UserImpl(
-      {required this.id,
+      {this.user_id = '',
       required this.name,
       required this.login,
-      required this.password});
+      required this.password,
+      final List<String> projects = const []})
+      : _projects = projects;
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
 
   @override
-  final String id;
+  @JsonKey()
+  final String user_id;
   @override
   final String name;
   @override
   final String login;
   @override
   final String password;
+  final List<String> _projects;
+  @override
+  @JsonKey()
+  List<String> get projects {
+    if (_projects is EqualUnmodifiableListView) return _projects;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_projects);
+  }
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, login: $login, password: $password)';
+    return 'User(user_id: $user_id, name: $name, login: $login, password: $password, projects: $projects)';
   }
 
   @override
@@ -154,16 +186,18 @@ class _$UserImpl implements _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
-            (identical(other.id, id) || other.id == id) &&
+            (identical(other.user_id, user_id) || other.user_id == user_id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.login, login) || other.login == login) &&
             (identical(other.password, password) ||
-                other.password == password));
+                other.password == password) &&
+            const DeepCollectionEquality().equals(other._projects, _projects));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, login, password);
+  int get hashCode => Object.hash(runtimeType, user_id, name, login, password,
+      const DeepCollectionEquality().hash(_projects));
 
   @JsonKey(ignore: true)
   @override
@@ -181,21 +215,24 @@ class _$UserImpl implements _User {
 
 abstract class _User implements User {
   const factory _User(
-      {required final String id,
+      {final String user_id,
       required final String name,
       required final String login,
-      required final String password}) = _$UserImpl;
+      required final String password,
+      final List<String> projects}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
-  String get id;
+  String get user_id;
   @override
   String get name;
   @override
   String get login;
   @override
   String get password;
+  @override
+  List<String> get projects;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

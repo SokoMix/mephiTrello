@@ -133,7 +133,7 @@ class _$ColumnImpl implements _Column {
       {required this.column_id,
       required this.project_id,
       required this.name,
-      required final List<String> tasks})
+      final List<String> tasks = const []})
       : _tasks = tasks;
 
   factory _$ColumnImpl.fromJson(Map<String, dynamic> json) =>
@@ -147,6 +147,7 @@ class _$ColumnImpl implements _Column {
   final String name;
   final List<String> _tasks;
   @override
+  @JsonKey()
   List<String> get tasks {
     if (_tasks is EqualUnmodifiableListView) return _tasks;
     // ignore: implicit_dynamic_type
@@ -195,7 +196,7 @@ abstract class _Column implements Column {
       {required final String column_id,
       required final String project_id,
       required final String name,
-      required final List<String> tasks}) = _$ColumnImpl;
+      final List<String> tasks}) = _$ColumnImpl;
 
   factory _Column.fromJson(Map<String, dynamic> json) = _$ColumnImpl.fromJson;
 
