@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:mephi_trello/utils/datetime_serialize.dart';
 
 part 'task.freezed.dart';
 part 'task.g.dart';
@@ -10,7 +11,7 @@ class Task with _$Task {
     String? description,
     required String column_id,
     required String task_id,
-    DateTime? deadline,
+    @UnixTimeSerializer() DateTime? deadline,
     required String project_id,
     @Default([]) List<String> performers,
   }) = _Task;

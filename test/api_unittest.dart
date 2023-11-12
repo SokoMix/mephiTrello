@@ -65,10 +65,30 @@ void main() {
         ),
         'ok',
       );
+
+      expect(
+        await api.addTask(
+          '121412',
+          '12414121',
+          Task(
+            name: 'Task1',
+            column_id: '12414121',
+            task_id: '3287454129820',
+            project_id: '121412',
+            deadline: DateTime(34512),
+          ),
+        ),
+        'ok',
+      );
     });
   });
 
   group('Getting models', () {
+    test('Login3', () async {
+      user = await api.loginUser('Dima', 'Dima');
+      expect(1, 1);
+    });
+
     test('Getting projects of user', () async {
       expect(
         (await api.getProjects())[0],
@@ -81,6 +101,9 @@ void main() {
       );
     });
 
+    // test('Getting task for date', () {
+    //   expect(actual, matcher)
+    // });
 
   });
 
@@ -92,6 +115,7 @@ void main() {
 
     test('Delete task', () async {
       expect(await api.deleteTask('987654235'), 'ok');
+      expect(await api.deleteTask('3287454129820'), 'ok');
     });
 
     test('Delete column', () async {
