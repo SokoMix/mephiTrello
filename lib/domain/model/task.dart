@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'task.freezed.dart';
+part 'task.g.dart';
 
 @freezed
 class Task with _$Task {
@@ -11,7 +12,7 @@ class Task with _$Task {
     required String task_id,
     DateTime? deadline,
     required String project_id,
-    required List<String> performers,
+    @Default([]) List<String> performers,
   }) = _Task;
 
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);

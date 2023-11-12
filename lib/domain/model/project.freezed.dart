@@ -24,7 +24,7 @@ mixin _$Project {
   String get owner_id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   int get color => throw _privateConstructorUsedError;
-  List<String> get perfomers => throw _privateConstructorUsedError;
+  List<String> get performers => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +41,7 @@ abstract class $ProjectCopyWith<$Res> {
       String owner_id,
       String name,
       int color,
-      List<String> perfomers});
+      List<String> performers});
 }
 
 /// @nodoc
@@ -61,7 +61,7 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
     Object? owner_id = null,
     Object? name = null,
     Object? color = null,
-    Object? perfomers = null,
+    Object? performers = null,
   }) {
     return _then(_value.copyWith(
       project_id: null == project_id
@@ -80,9 +80,9 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as int,
-      perfomers: null == perfomers
-          ? _value.perfomers
-          : perfomers // ignore: cast_nullable_to_non_nullable
+      performers: null == performers
+          ? _value.performers
+          : performers // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ) as $Val);
   }
@@ -100,7 +100,7 @@ abstract class _$$ProjectImplCopyWith<$Res> implements $ProjectCopyWith<$Res> {
       String owner_id,
       String name,
       int color,
-      List<String> perfomers});
+      List<String> performers});
 }
 
 /// @nodoc
@@ -118,7 +118,7 @@ class __$$ProjectImplCopyWithImpl<$Res>
     Object? owner_id = null,
     Object? name = null,
     Object? color = null,
-    Object? perfomers = null,
+    Object? performers = null,
   }) {
     return _then(_$ProjectImpl(
       project_id: null == project_id
@@ -137,9 +137,9 @@ class __$$ProjectImplCopyWithImpl<$Res>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as int,
-      perfomers: null == perfomers
-          ? _value._perfomers
-          : perfomers // ignore: cast_nullable_to_non_nullable
+      performers: null == performers
+          ? _value._performers
+          : performers // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
   }
@@ -153,8 +153,8 @@ class _$ProjectImpl implements _Project {
       required this.owner_id,
       required this.name,
       required this.color,
-      required final List<String> perfomers})
-      : _perfomers = perfomers;
+      final List<String> performers = const []})
+      : _performers = performers;
 
   factory _$ProjectImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProjectImplFromJson(json);
@@ -167,17 +167,18 @@ class _$ProjectImpl implements _Project {
   final String name;
   @override
   final int color;
-  final List<String> _perfomers;
+  final List<String> _performers;
   @override
-  List<String> get perfomers {
-    if (_perfomers is EqualUnmodifiableListView) return _perfomers;
+  @JsonKey()
+  List<String> get performers {
+    if (_performers is EqualUnmodifiableListView) return _performers;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_perfomers);
+    return EqualUnmodifiableListView(_performers);
   }
 
   @override
   String toString() {
-    return 'Project(project_id: $project_id, owner_id: $owner_id, name: $name, color: $color, perfomers: $perfomers)';
+    return 'Project(project_id: $project_id, owner_id: $owner_id, name: $name, color: $color, performers: $performers)';
   }
 
   @override
@@ -192,13 +193,13 @@ class _$ProjectImpl implements _Project {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.color, color) || other.color == color) &&
             const DeepCollectionEquality()
-                .equals(other._perfomers, _perfomers));
+                .equals(other._performers, _performers));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, project_id, owner_id, name,
-      color, const DeepCollectionEquality().hash(_perfomers));
+      color, const DeepCollectionEquality().hash(_performers));
 
   @JsonKey(ignore: true)
   @override
@@ -220,7 +221,7 @@ abstract class _Project implements Project {
       required final String owner_id,
       required final String name,
       required final int color,
-      required final List<String> perfomers}) = _$ProjectImpl;
+      final List<String> performers}) = _$ProjectImpl;
 
   factory _Project.fromJson(Map<String, dynamic> json) = _$ProjectImpl.fromJson;
 
@@ -233,7 +234,7 @@ abstract class _Project implements Project {
   @override
   int get color;
   @override
-  List<String> get perfomers;
+  List<String> get performers;
   @override
   @JsonKey(ignore: true)
   _$$ProjectImplCopyWith<_$ProjectImpl> get copyWith =>

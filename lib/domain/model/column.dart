@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'column.freezed.dart';
+part 'column.g.dart';
 
 @freezed
 class Column with _$Column {
@@ -8,7 +9,7 @@ class Column with _$Column {
     required String column_id,
     required String project_id,
     required String name,
-    required List<String> tasks,
+    @Default([]) List<String> tasks,
   }) = _Column;
 
   factory Column.fromJson(Map<String, dynamic> json) => _$ColumnFromJson(json);

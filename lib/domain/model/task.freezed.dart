@@ -180,7 +180,7 @@ class _$TaskImpl implements _Task {
       required this.task_id,
       this.deadline,
       required this.project_id,
-      required final List<String> performers})
+      final List<String> performers = const []})
       : _performers = performers;
 
   factory _$TaskImpl.fromJson(Map<String, dynamic> json) =>
@@ -200,6 +200,7 @@ class _$TaskImpl implements _Task {
   final String project_id;
   final List<String> _performers;
   @override
+  @JsonKey()
   List<String> get performers {
     if (_performers is EqualUnmodifiableListView) return _performers;
     // ignore: implicit_dynamic_type
@@ -264,7 +265,7 @@ abstract class _Task implements Task {
       required final String task_id,
       final DateTime? deadline,
       required final String project_id,
-      required final List<String> performers}) = _$TaskImpl;
+      final List<String> performers}) = _$TaskImpl;
 
   factory _Task.fromJson(Map<String, dynamic> json) = _$TaskImpl.fromJson;
 
