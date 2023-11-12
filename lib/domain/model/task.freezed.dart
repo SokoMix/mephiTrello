@@ -24,6 +24,7 @@ mixin _$Task {
   String? get description => throw _privateConstructorUsedError;
   String get column_id => throw _privateConstructorUsedError;
   String get task_id => throw _privateConstructorUsedError;
+  @UnixTimeSerializer()
   DateTime? get deadline => throw _privateConstructorUsedError;
   String get project_id => throw _privateConstructorUsedError;
   List<String> get performers => throw _privateConstructorUsedError;
@@ -43,7 +44,7 @@ abstract class $TaskCopyWith<$Res> {
       String? description,
       String column_id,
       String task_id,
-      DateTime? deadline,
+      @UnixTimeSerializer() DateTime? deadline,
       String project_id,
       List<String> performers});
 }
@@ -114,7 +115,7 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
       String? description,
       String column_id,
       String task_id,
-      DateTime? deadline,
+      @UnixTimeSerializer() DateTime? deadline,
       String project_id,
       List<String> performers});
 }
@@ -178,7 +179,7 @@ class _$TaskImpl implements _Task {
       this.description,
       required this.column_id,
       required this.task_id,
-      this.deadline,
+      @UnixTimeSerializer() this.deadline,
       required this.project_id,
       final List<String> performers = const []})
       : _performers = performers;
@@ -195,6 +196,7 @@ class _$TaskImpl implements _Task {
   @override
   final String task_id;
   @override
+  @UnixTimeSerializer()
   final DateTime? deadline;
   @override
   final String project_id;
@@ -263,7 +265,7 @@ abstract class _Task implements Task {
       final String? description,
       required final String column_id,
       required final String task_id,
-      final DateTime? deadline,
+      @UnixTimeSerializer() final DateTime? deadline,
       required final String project_id,
       final List<String> performers}) = _$TaskImpl;
 
@@ -278,6 +280,7 @@ abstract class _Task implements Task {
   @override
   String get task_id;
   @override
+  @UnixTimeSerializer()
   DateTime? get deadline;
   @override
   String get project_id;

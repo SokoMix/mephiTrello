@@ -65,23 +65,56 @@ void main() {
         ),
         'ok',
       );
+
+      expect(
+        await api.addTask(
+          '121412',
+          '12414121',
+          Task(
+            name: 'Task1',
+            column_id: '12414121',
+            task_id: '3287454129820',
+            project_id: '121412',
+            deadline: DateTime(2023, 06, 11, 12),
+            performers: ['b0496881-bf20-4fb9-b739-da37a85ad67a'],
+          ),
+        ),
+        'ok',
+      );
     });
   });
 
   group('Getting models', () {
+    test('Login3', () async {
+      user = await api.loginUser('Dima', 'Dima');
+      expect(1, 1);
+    });
+
     test('Getting projects of user', () async {
       expect(
         (await api.getProjects())[0],
-            Project(
-              project_id: '121412',
-              owner_id: user!.user_id,
-              name: 'TestProj',
-              color: 12937,
-            ),
+        Project(
+          project_id: '121412',
+          owner_id: user!.user_id,
+          name: 'TestProj',
+          color: 12937,
+        ),
       );
     });
 
-
+    test('Getting task for date', () async {
+      expect(
+        (await api.getTasksForDate('121412', DateTime(2023, 06, 11)))[0],
+        Task(
+          name: 'Task1',
+          column_id: '12414121',
+          task_id: '3287454129820',
+          project_id: '121412',
+          deadline: DateTime(2023, 06, 11, 12),
+          performers: ['b0496881-bf20-4fb9-b739-da37a85ad67a'],
+        ),
+      );
+    });
   });
 
   group('Deleting models', () {
@@ -92,6 +125,7 @@ void main() {
 
     test('Delete task', () async {
       expect(await api.deleteTask('987654235'), 'ok');
+      expect(await api.deleteTask('3287454129820'), 'ok');
     });
 
     test('Delete column', () async {

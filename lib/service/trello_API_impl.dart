@@ -165,7 +165,7 @@ class TrelloApiImpl implements TrelloApi {
   Future<List<Task>> getTasksForDate(String projectId, DateTime date) async {
     try {
       Response req = await _instance.get(
-        '/${_id}/${projectId}/${date.toString()}',
+        '/${_id}/${projectId}/${date.toUtc().millisecondsSinceEpoch}',
       );
       List<Task> a = (jsonDecode(req.data)['tasks'] as List)
           .map((e) => Task.fromJson(e))
