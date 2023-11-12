@@ -72,7 +72,9 @@ class TrelloApiImpl implements TrelloApi {
 
   @override
   Future<String> addColumn(
-      String projectId, Map<String, dynamic> columnMap) async {
+    String projectId,
+    Map<String, dynamic> columnMap,
+  ) async {
     try {
       Response req = await _instance.post(
         '/${projectId}/column',
@@ -109,7 +111,10 @@ class TrelloApiImpl implements TrelloApi {
 
   @override
   Future<String> addTask(
-      String projectId, String columnId, Map<String, dynamic> taskMap) async {
+    String projectId,
+    String columnId,
+    Map<String, dynamic> taskMap,
+  ) async {
     try {
       Response req = await _instance.post(
         '/${projectId}/${columnId}/task',
@@ -208,7 +213,10 @@ class TrelloApiImpl implements TrelloApi {
 
   @override
   Future<String> updateColumn(
-      String projectId, String columnId, Map<String, dynamic> columnMap) async {
+    String projectId,
+    String columnId,
+    Map<String, dynamic> columnMap,
+  ) async {
     try {
       Response req = await _instance.put(
         '/updclm/${projectId}/${columnId}',
@@ -227,7 +235,10 @@ class TrelloApiImpl implements TrelloApi {
 
   @override
   Future<String> updateTask(
-      String projectId, String taskId, Map<String, dynamic> taskMap) async {
+    String projectId,
+    String taskId,
+    Map<String, dynamic> taskMap,
+  ) async {
     try {
       Response req = await _instance.put(
         '/updtask/${projectId}/${taskId}',

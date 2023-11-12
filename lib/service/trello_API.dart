@@ -1,5 +1,3 @@
-import 'package:dio/dio.dart';
-
 export 'trello_API_impl.dart';
 
 abstract class TrelloApi {
