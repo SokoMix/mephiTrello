@@ -19,8 +19,18 @@ ThemeData lightTheme = ThemeData(
     ),
     titleMedium: TextStyle(
       fontSize: 20,
-      fontWeight: FontWeight.w300,
+      fontWeight: FontWeight.w700,
       color: Color(0xFF000000),
+    ),
+    labelMedium: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w300,
+      color: Colors.grey[700],
+    ),
+    labelSmall: TextStyle(
+      fontSize: 15,
+      fontWeight: FontWeight.w700,
+      color: Colors.grey[700],
     ),
   ),
   iconTheme: IconThemeData(
