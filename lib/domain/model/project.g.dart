@@ -8,10 +8,10 @@ part of 'project.dart';
 
 _$ProjectImpl _$$ProjectImplFromJson(Map<String, dynamic> json) =>
     _$ProjectImpl(
-      project_id: json['project_id'] as String,
-      owner_id: json['owner_id'] as String,
+      project_id: json['project_id'] as String? ?? '',
+      owner_id: json['owner_id'] as String? ?? '',
       name: json['name'] as String,
-      color: json['color'] as int,
+      color: json['color'] as int? ?? 0,
       performers: (json['performers'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
