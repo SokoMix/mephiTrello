@@ -30,8 +30,9 @@ class TrelloApiImpl implements TrelloApi {
           },
         },
       );
-      _instance = GetIt.I<DIimpl>().getDioInstance(req.data['user']['user_id']);
+      // _instance = GetIt.I<DIimpl>().getDioInstance(req.data['user']['user_id']);
       _id = req.data['user']['user_id'];
+      _instance.options.headers = {'Authorization': 'Bearer ${_id ?? ''}'};
       return User.fromJson(req.data['user']);
     } catch (e) {
       if (e is DioException) {
@@ -51,6 +52,8 @@ class TrelloApiImpl implements TrelloApi {
           'user': user.toJson(),
         },
       );
+      _id = req.data['user']['user_id'];
+      _instance.options.headers = {'Authorization': 'Bearer ${_id ?? ''}'};
       return User.fromJson(req.data['user']);
     } catch (e) {
       if (e is DioException) {

@@ -6,10 +6,10 @@ part 'project.g.dart';
 @freezed
 class Project with _$Project {
   const factory Project({
-    required String project_id,
-    required String owner_id,
+    @Default('') String project_id,
+    @Default('') String owner_id,
     required String name,
-    required int color,
+    @Default(0) int color,
     @Default([]) List<String> performers,
   }) = _Project;
 

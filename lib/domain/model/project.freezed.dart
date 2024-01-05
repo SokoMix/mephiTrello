@@ -149,10 +149,10 @@ class __$$ProjectImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProjectImpl implements _Project {
   const _$ProjectImpl(
-      {required this.project_id,
-      required this.owner_id,
+      {this.project_id = '',
+      this.owner_id = '',
       required this.name,
-      required this.color,
+      this.color = 0,
       final List<String> performers = const []})
       : _performers = performers;
 
@@ -160,12 +160,15 @@ class _$ProjectImpl implements _Project {
       _$$ProjectImplFromJson(json);
 
   @override
+  @JsonKey()
   final String project_id;
   @override
+  @JsonKey()
   final String owner_id;
   @override
   final String name;
   @override
+  @JsonKey()
   final int color;
   final List<String> _performers;
   @override
@@ -217,10 +220,10 @@ class _$ProjectImpl implements _Project {
 
 abstract class _Project implements Project {
   const factory _Project(
-      {required final String project_id,
-      required final String owner_id,
+      {final String project_id,
+      final String owner_id,
       required final String name,
-      required final int color,
+      final int color,
       final List<String> performers}) = _$ProjectImpl;
 
   factory _Project.fromJson(Map<String, dynamic> json) = _$ProjectImpl.fromJson;
