@@ -50,11 +50,13 @@ void registerDI() {
   _instance.registerSingleton<TrelloApi>(TrelloApiImpl(GetIt.I.get<DIimpl>().getDioInstance()));
   _instance.registerSingleton(MyRouter());
   _instance.registerSingleton(RouterManager(_instance.get<MyRouter>().router));
-  _instance.registerSingleton(ProjectManager(
+  _instance.registerSingleton(
+    ProjectManager(
       _instance.get<TrelloApi>(),
       _instance.get<RouterManager>(),
-  ),
+    ),
   );
+
   _instance.registerSingleton(ChangeNotifierProvider((ref) => _instance.get<ProjectManager>()));
   _instance.registerSingleton(UserManager());
   _instance.registerSingleton(AuthManager(

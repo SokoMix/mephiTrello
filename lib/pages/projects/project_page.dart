@@ -4,9 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mephi_trello/pages/projects/projects_manager.dart';
 
-class ProjectPage extends HookWidget {
+class ProjectPage extends StatefulHookWidget {
   const ProjectPage({super.key});
 
+  @override
+  State<ProjectPage> createState() => _ProjectPageState();
+}
+
+class _ProjectPageState extends State<ProjectPage> {
   @override
   Widget build(BuildContext context) {
     final _nameCtrl = useTextEditingController();
