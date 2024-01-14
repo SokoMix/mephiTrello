@@ -1,5 +1,3 @@
 import 'analytics.dart';
 
-class AnalyticsImpl implements Analytics {
-
-}
+class AnalyticsImpl implements Analytics {}

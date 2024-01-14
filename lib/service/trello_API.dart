@@ -12,7 +12,7 @@ abstract class TrelloApi {
   Future<String> addColumn(String projectId, Column column);
   Future<String> addProject(Project project);
   Future<String> addTask(String projectId, String columnId, Task task);
-  Future<List<dynamic>> getProjectTable(String projectId);
+  Future<List<Task>> getProjectTable(String projectId);
   Future<List<Task>> getTasksForDate(String projectId, DateTime date);
   Future<String> updateTask(String projectId, String taskId, Task task);
   Future<String> updateColumn(String projectId, String columnId, Column column);
@@ -20,4 +20,5 @@ abstract class TrelloApi {
   Future<String> deleteColumn(String projectId, String columnId);
   Future<String> deleteTask(String taskId);
   Future<String> deleteProject(String projectId);
+  Future<List<User>> getPerformersInProject(String projectId);
 }

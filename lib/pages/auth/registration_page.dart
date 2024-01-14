@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 
 import 'auth_manager.dart';
@@ -12,13 +13,8 @@ class RegistrationPage extends StatefulHookWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
-  late final AuthManager _authManager;
-
-  @override
-  void initState() {
-    super.initState();
-    _authManager = GetIt.I.get<AuthManager>();
-  }
+  final _authManagerProvider =
+      GetIt.I.get<ChangeNotifierProvider<AuthManager>>();
 
   @override
   Widget build(BuildContext context) {
@@ -37,15 +33,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
           TextField(
             controller: _pswdCtrl,
           ),
-          TextButton(
-              onPressed: () {
-                _authManager.register(
-                    name: _nameCtrl.text,
-                    login: _loginCtrl.text,
-                    password: _pswdCtrl.text,
-                );
-              },
-              child: Text('Register'),
+          Consumer(
+            builder: (context, ref, _) {
+              return TextButton(
+                onPressed: () {
+                  ref.watch(_authManagerProvider).register(
+                        name: _nameCtrl.text,
+                        login: _loginCtrl.text,
+                        password: _pswdCtrl.text,
+                      );
+                },
+                child: Text('Register'),
+              );
+            },
           ),
         ],
       ),

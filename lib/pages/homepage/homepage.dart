@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mephi_trello/pages/homepage/homepage_widgets/homepage_appbar.dart';
 import 'package:mephi_trello/pages/homepage/homepage_widgets/dialog_box.dart';
+import 'package:mephi_trello/pages/homepage/tasks/tasks_manager.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -88,7 +92,7 @@ class _HomePageState extends State<HomePage> {
             //         (context, int index) {
             //           return Column(
             //             children: [
-            //               //MainList(),
+            //               Text('12'),
             //             ],
             //           );
             //         },
@@ -97,6 +101,11 @@ class _HomePageState extends State<HomePage> {
             //     ),
             //   ],
             // ),
+            Consumer(
+              builder: (context, ref, _) => ref
+                  .watch(GetIt.I.get<ChangeNotifierProvider<TaskManager>>())
+                  .mapTasks(),
+            ),
           ],
         ),
       ),

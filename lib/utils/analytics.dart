@@ -1,3 +1,1 @@
-abstract class Analytics {
-
-}
+abstract class Analytics {}

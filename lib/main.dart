@@ -19,10 +19,11 @@ Future main() async {
   registerDI();
   SharedPrefs a1 = SharedPrefsImpl();
   //a1.init(await DIimpl().getSharedPrefsInstance());
-  runApp(ProviderScope(
-    parent: Providers().providerContainer(),
+  runApp(
+    ProviderScope(
+      parent: Providers().providerContainer(),
       child: const MyApp(),
-  ),
+    ),
   );
 }
 

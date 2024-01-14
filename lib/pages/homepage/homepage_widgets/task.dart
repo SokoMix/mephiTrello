@@ -1,3 +1,4 @@
+@Deprecated('We use task from domain folder with codegen')
 class Task {
   String id;
   String title;

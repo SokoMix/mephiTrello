@@ -148,12 +148,15 @@ class TrelloApiImpl implements TrelloApi {
   /// Task classes, so retval includes table of Tasks divided on Columns
   /// LIST CAN BE EMPTY
   @override
-  Future<List> getProjectTable(String projectId) async {
+  Future<List<Task>> getProjectTable(String projectId) async {
     try {
       Response req = await _instance.get(
         '/${projectId}/table',
       );
-      return jsonDecode(req.data)['project_table'];
+      return ((jsonDecode(req.data)['project_table'])
+              as List<Map<String, dynamic>>)
+          .map((e) => Task.fromJson(e))
+          .toList();
     } catch (e) {
       if (e is DioException) {
         rethrow;
@@ -170,10 +173,9 @@ class TrelloApiImpl implements TrelloApi {
       Response req = await _instance.get(
         '/${_id}/${projectId}/${date.toUtc().millisecondsSinceEpoch}',
       );
-      List<Task> a = (jsonDecode(req.data)['tasks'] as List)
+      return (jsonDecode(req.data)['tasks'] as List)
           .map((e) => Task.fromJson(e))
           .toList();
-      return a;
     } catch (e) {
       if (e is DioException) {
         rethrow;
@@ -281,6 +283,25 @@ class TrelloApiImpl implements TrelloApi {
         },
       );
       return req.data;
+    } catch (e) {
+      if (e is DioException) {
+        rethrow;
+      }
+      throw Exception('Something not ok on App side');
+    }
+  }
+
+  /// Returns List of Users in current projects. You can use it
+  /// for displaying available performers with Id, Name or with smthg else
+  @override
+  Future<List<User>> getPerformersInProject(String projectId) async {
+    try {
+      Response resp = await _instance.get(
+        '/${projectId}/performers',
+      );
+      return (jsonDecode(resp.data)['performers'] as List<Map<String, dynamic>>)
+          .map((e) => User.fromJson(e))
+          .toList();
     } catch (e) {
       if (e is DioException) {
         rethrow;
