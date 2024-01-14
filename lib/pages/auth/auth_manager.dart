@@ -1,6 +1,4 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mephi_trello/domain/user_manager.dart';
 import 'package:mephi_trello/pages/projects/projects_manager.dart';
 import 'package:mephi_trello/service/trello_API.dart';
@@ -15,10 +13,10 @@ class AuthManager extends ChangeNotifier {
   final UserManager _userManager;
 
   AuthManager(
-      this._api,
-      this._routerManager,
-      this._userManager,
-      this._projectManager,
+    this._api,
+    this._routerManager,
+    this._userManager,
+    this._projectManager,
   );
 
   Future<void> login(String login, String password) async {
@@ -28,9 +26,7 @@ class AuthManager extends ChangeNotifier {
       await _projectManager.loadProjects();
       _routerManager.goProjectsPage();
       notifyListeners();
-    } catch (e) {
-
-    }
+    } catch (e) {}
   }
 
   void toRegistrationPage() {
@@ -47,8 +43,6 @@ class AuthManager extends ChangeNotifier {
       user = await _api.registerUser(user);
       notifyListeners();
       _userManager.login(user);
-    } catch (e) {
-
-    }
+    } catch (e) {}
   }
 }

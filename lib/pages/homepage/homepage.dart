@@ -101,9 +101,11 @@ class _HomePageState extends State<HomePage> {
             //     ),
             //   ],
             // ),
-          Consumer(
-              builder: (context, ref, _) => ref.watch(GetIt.I.get<ChangeNotifierProvider<TaskManager>>()).mapTasks(),
-          ),
+            Consumer(
+              builder: (context, ref, _) => ref
+                  .watch(GetIt.I.get<ChangeNotifierProvider<TaskManager>>())
+                  .mapTasks(),
+            ),
           ],
         ),
       ),

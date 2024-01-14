@@ -12,35 +12,44 @@ class AuthPage extends StatefulHookWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
-  final _authManagerProvider = GetIt.I.get<ChangeNotifierProvider<AuthManager>>();
+  final _authManagerProvider =
+      GetIt.I.get<ChangeNotifierProvider<AuthManager>>();
 
   @override
   Widget build(BuildContext context) {
     final _loginCtrl = useTextEditingController();
     final _pswdCtrl = useTextEditingController();
     return Material(
-      child: Center(
-        child: Consumer(
-          builder: (context, ref, _) {
-            return Column(
-              children: [
-                TextField(
-                  controller: _loginCtrl,
-                ),
-                TextField(
-                  controller: _pswdCtrl,
-                ),
-                TextButton(
-                  onPressed: (){ref.watch(_authManagerProvider).login(_loginCtrl.text, _pswdCtrl.text);},
-                  child: Text('Login'),
-                ),
-                TextButton(
-                  onPressed: (){ref.watch(_authManagerProvider).toRegistrationPage();},
-                  child: Text('Register'),
-                ),
-              ],
-            );
-          },
+      child: SafeArea(
+        child: Center(
+          child: Consumer(
+            builder: (context, ref, _) {
+              return Column(
+                children: [
+                  TextField(
+                    controller: _loginCtrl,
+                  ),
+                  TextField(
+                    controller: _pswdCtrl,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      ref
+                          .watch(_authManagerProvider)
+                          .login(_loginCtrl.text, _pswdCtrl.text);
+                    },
+                    child: Text('Login'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      ref.watch(_authManagerProvider).toRegistrationPage();
+                    },
+                    child: Text('Register'),
+                  ),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );

@@ -5,11 +5,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'local_cache.dart';
 
 class SharedPrefsImpl implements SharedPrefs {
-
   late SharedPreferences _instance;
 
   @override
-  Map<String, dynamic> getJson(String path) => jsonDecode(_instance.getString(path) ?? '');
+  Map<String, dynamic> getJson(String path) =>
+      jsonDecode(_instance.getString(path) ?? '');
 
   @override
   void init(SharedPreferences instance) {

@@ -14,10 +14,11 @@ class AnimatedTextForm extends StatefulHookWidget {
   });
 
   @override
-  State<StatefulWidget> createState() =>_AnimatedTextFormState();
+  State<StatefulWidget> createState() => _AnimatedTextFormState();
 }
 
-class _AnimatedTextFormState extends State<AnimatedTextForm> with SingleTickerProviderStateMixin {
+class _AnimatedTextFormState extends State<AnimatedTextForm>
+    with SingleTickerProviderStateMixin {
   bool _isDelete = false;
 
   @override
@@ -28,13 +29,13 @@ class _AnimatedTextFormState extends State<AnimatedTextForm> with SingleTickerPr
     )..addListener(() => setState(() {}));
 
     Animation<Offset> _offsetAdd = Tween<Offset>(
-        begin: Offset(1.0, 0.0),
-        end: Offset.zero,
+      begin: Offset(1.0, 0.0),
+      end: Offset.zero,
     ).animate(
-        CurvedAnimation(
-            parent: _animationCtrl,
-            curve: Curves.bounceOut,
-        ),
+      CurvedAnimation(
+        parent: _animationCtrl,
+        curve: Curves.bounceOut,
+      ),
     );
 
     Animation<Offset> _offsetDelete = Tween<Offset>(
@@ -57,17 +58,16 @@ class _AnimatedTextFormState extends State<AnimatedTextForm> with SingleTickerPr
               controller: widget._ctrl,
             ),
           ),
-    IconButton(
-                icon: Icon(Icons.delete),
-                color: Colors.red,
-                onPressed: (){
-                    _animationCtrl.forward();
-                    widget._callbackDeleteAt(widget._ctrl);
-                  },
-              ),
+          IconButton(
+            icon: Icon(Icons.delete),
+            color: Colors.red,
+            onPressed: () {
+              _animationCtrl.forward();
+              widget._callbackDeleteAt(widget._ctrl);
+            },
+          ),
         ],
       ),
     );
   }
-
 }

@@ -19,8 +19,8 @@ class _TextEditingControllerHook extends Hook<TextEditingController> {
       _TextEditingControllerHookState();
 }
 
-class _TextEditingControllerHookState extends
-  HookState<TextEditingController, _TextEditingControllerHook> {
+class _TextEditingControllerHookState
+    extends HookState<TextEditingController, _TextEditingControllerHook> {
   late final _textController = TextEditingController(
     text: hook.text,
   );

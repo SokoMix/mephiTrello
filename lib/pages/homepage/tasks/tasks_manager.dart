@@ -17,7 +17,7 @@ class TaskManager extends ChangeNotifier {
     this._api,
     this._routerManager,
   );
-  
+
   Future<void> loadTasks() async {
     try {
       if (_projectId != null) {
@@ -26,28 +26,29 @@ class TaskManager extends ChangeNotifier {
       } else {
         throw Exception('Project id is null, error in loading tasks');
       }
-    } catch (e) {
-
-    }
+    } catch (e) {}
   }
-  
-  void setProjectId(String? projectId) 
-    => _projectId = projectId;
-  
+
+  void setProjectId(String? projectId) => _projectId = projectId;
+
   Widget mapTasks() {
     return Column(
-      children: (_tasks ?? []).map((e) => ListTile(
-        title: Text(e.name),
-        trailing: Text((e.deadline != null) ? DateFormat.yMEd().format(e.deadline!) : ''),
-      ),).toList(),
+      children: (_tasks ?? [])
+          .map(
+            (e) => ListTile(
+              title: Text(e.name),
+              trailing: Text((e.deadline != null)
+                  ? DateFormat.yMEd().format(e.deadline!)
+                  : ''),
+            ),
+          )
+          .toList(),
     );
   }
 
   Future<void> addTask(Task task) async {
     try {
       final resp = await _api.addTask(_projectId!, task.column_id, task);
-    } catch (e) {
-
-    }
+    } catch (e) {}
   }
 }

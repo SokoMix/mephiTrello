@@ -153,7 +153,10 @@ class TrelloApiImpl implements TrelloApi {
       Response req = await _instance.get(
         '/${projectId}/table',
       );
-      return ((jsonDecode(req.data)['project_table']) as List<Map<String, dynamic>>).map((e) => Task.fromJson(e)).toList();
+      return ((jsonDecode(req.data)['project_table'])
+              as List<Map<String, dynamic>>)
+          .map((e) => Task.fromJson(e))
+          .toList();
     } catch (e) {
       if (e is DioException) {
         rethrow;
@@ -296,7 +299,9 @@ class TrelloApiImpl implements TrelloApi {
       Response resp = await _instance.get(
         '/${projectId}/performers',
       );
-      return (jsonDecode(resp.data)['performers'] as List<Map<String, dynamic>>).map((e) => User.fromJson(e)).toList();
+      return (jsonDecode(resp.data)['performers'] as List<Map<String, dynamic>>)
+          .map((e) => User.fromJson(e))
+          .toList();
     } catch (e) {
       if (e is DioException) {
         rethrow;

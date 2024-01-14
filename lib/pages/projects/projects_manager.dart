@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mephi_trello/pages/homepage/tasks/tasks_manager.dart';
 import 'package:mephi_trello/router/router_manager.dart';
@@ -26,8 +27,16 @@ class ProjectManager extends ChangeNotifier {
   }
 
   void init() {
-    _poolingHandle = Stream.periodic(Duration(milliseconds: 500), (_) {return;});
-    _poolingSub = _poolingHandle?.listen((event) {_api.getProjects();});
+    _poolingHandle = Stream.periodic(Duration(milliseconds: 500), (_) {
+      return;
+    });
+    _poolingSub = _poolingHandle?.listen((event) async {
+      final new_projects = await _api.getProjects();
+      if (!listEquals(new_projects, _projects)) {
+        _projects = new_projects;
+        notifyListeners();
+      }
+    });
     _poolingSub?.pause();
   }
 
@@ -36,7 +45,7 @@ class ProjectManager extends ChangeNotifier {
     _projects = await _api.getProjects();
     notifyListeners();
   }
-  
+
   Future<void> createProject(String name, {List<String>? performers}) async {
     await _api.addProject(
       Project(
@@ -48,30 +57,30 @@ class ProjectManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  Widget mapProjects()
-    => Column(
-      children: _formatProjects(),
-    );
+  Widget mapProjects() => Column(
+        children: _formatProjects(),
+      );
 
-  List<Widget> _formatProjects() => projects.map(
-          (e) =>
-              TextButton(
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(2.0)),
-                    ),
-                  ),
-                  backgroundColor: MaterialStateProperty.all(
-                    Color(int.parse('0xFF${e.color.toRadixString(16)}')),
-                  ),
-                ),
-                onPressed: () {
-                  _taskManager.setProjectId(e.project_id);
-                  _taskManager.loadTasks();
-                  _routerManager.goTasksPage();
-                  },
-                child: Text('${e.name}'),
+  List<Widget> _formatProjects() => projects
+      .map(
+        (e) => TextButton(
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(2.0)),
               ),
-  ).toList();
+            ),
+            backgroundColor: MaterialStateProperty.all(
+              Color(int.parse('0xFF${e.color.toRadixString(16)}')),
+            ),
+          ),
+          onPressed: () {
+            _taskManager.setProjectId(e.project_id);
+            _taskManager.loadTasks();
+            _routerManager.goTasksPage();
+          },
+          child: Text('${e.name}'),
+        ),
+      )
+      .toList();
 }
