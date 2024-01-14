@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:mephi_trello/pages/homepage/tasks/tasks_manager.dart';
 import 'package:mephi_trello/router/router_manager.dart';
 import 'package:mephi_trello/service/trello_API.dart';
 
@@ -9,13 +10,20 @@ import '../../domain/model/project.dart';
 class ProjectManager extends ChangeNotifier {
   final TrelloApi _api;
   final RouterManager _routerManager;
+  final TaskManager _taskManager;
   Stream<void>? _poolingHandle;
   StreamSubscription<void>? _poolingSub;
   List<Project>? _projects;
 
   List<Project> get projects => _projects ?? [];
 
-  ProjectManager(this._api, this._routerManager) {init();}
+  ProjectManager(
+    this._api,
+    this._routerManager,
+    this._taskManager,
+  ) {
+    init();
+  }
 
   void init() {
     _poolingHandle = Stream.periodic(Duration(milliseconds: 500), (_) {return;});
@@ -29,8 +37,13 @@ class ProjectManager extends ChangeNotifier {
     notifyListeners();
   }
   
-  Future<void> createProject(String name) async {
-    await _api.addProject(Project(name: name));
+  Future<void> createProject(String name, {List<String>? performers}) async {
+    await _api.addProject(
+      Project(
+        name: name,
+        performers: performers ?? [],
+      ),
+    );
     await loadProjects();
     notifyListeners();
   }
@@ -53,7 +66,11 @@ class ProjectManager extends ChangeNotifier {
                     Color(int.parse('0xFF${e.color.toRadixString(16)}')),
                   ),
                 ),
-                onPressed: () { _routerManager.goTasksPage(); },
+                onPressed: () {
+                  _taskManager.setProjectId(e.project_id);
+                  _taskManager.loadTasks();
+                  _routerManager.goTasksPage();
+                  },
                 child: Text('${e.name}'),
               ),
   ).toList();

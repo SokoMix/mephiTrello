@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mephi_trello/domain/user_manager.dart';
 import 'package:mephi_trello/pages/projects/projects_manager.dart';
@@ -7,7 +8,7 @@ import 'package:mephi_trello/service/trello_API.dart';
 import '../../domain/model/user.dart';
 import '../../router/router_manager.dart';
 
-class AuthManager {
+class AuthManager extends ChangeNotifier {
   final TrelloApi _api;
   final RouterManager _routerManager;
   final ProjectManager _projectManager;
@@ -26,6 +27,7 @@ class AuthManager {
       _userManager.login(user);
       await _projectManager.loadProjects();
       _routerManager.goProjectsPage();
+      notifyListeners();
     } catch (e) {
 
     }
@@ -43,6 +45,7 @@ class AuthManager {
     try {
       User user = User(name: name, login: login, password: password);
       user = await _api.registerUser(user);
+      notifyListeners();
       _userManager.login(user);
     } catch (e) {
 

@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mephi_trello/domain/user_manager.dart';
 import 'package:mephi_trello/pages/auth/auth_manager.dart';
+import 'package:mephi_trello/pages/homepage/tasks/tasks_manager.dart';
 import 'package:mephi_trello/pages/projects/projects_manager.dart';
 import 'package:mephi_trello/router/router.dart';
 import 'package:mephi_trello/router/router_manager.dart';
@@ -50,20 +51,22 @@ void registerDI() {
   _instance.registerSingleton<TrelloApi>(TrelloApiImpl(GetIt.I.get<DIimpl>().getDioInstance()));
   _instance.registerSingleton(MyRouter());
   _instance.registerSingleton(RouterManager(_instance.get<MyRouter>().router));
-  _instance.registerSingleton(
-    ProjectManager(
+  _instance.registerSingleton(ChangeNotifierProvider((ref) => TaskManager(
+    _instance.get<TrelloApi>(),
+    _instance.get<RouterManager>(),
+  ),),);
+  _instance.registerSingleton(ChangeNotifierProvider((ref) => ProjectManager(
       _instance.get<TrelloApi>(),
       _instance.get<RouterManager>(),
-    ),
-  );
-
-  _instance.registerSingleton(ChangeNotifierProvider((ref) => _instance.get<ProjectManager>()));
-  _instance.registerSingleton(UserManager());
-  _instance.registerSingleton(AuthManager(
+      ref.watch(_instance.get<ChangeNotifierProvider<TaskManager>>()),
+  ),),);
+  _instance.registerSingleton(ChangeNotifierProvider((ref) => UserManager()));
+  _instance.registerSingleton(ChangeNotifierProvider((ref) =>
+    AuthManager(
       _instance.get<TrelloApi>(),
-    _instance.get<RouterManager>(),
-    _instance.get<UserManager>(),
-    _instance.get<ProjectManager>(),
-  ),
-  );
+      _instance.get<RouterManager>(),
+      ref.watch(_instance.get<ChangeNotifierProvider<UserManager>>()),
+      ref.watch(_instance.get<ChangeNotifierProvider<ProjectManager>>()),
+    ),
+  ),);
 }

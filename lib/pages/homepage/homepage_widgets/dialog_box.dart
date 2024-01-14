@@ -21,8 +21,13 @@ class _DialogBoxState extends State<DialogBox> {
           var width = MediaQuery.of(context).size.width;
 
           return Container(
-            height: height - 500,
-            width: width - 100,
+            /// Хотфикс блокера страницы. Тебе нужно будет
+            /// заверстать адаптивно через LayoutBuilder, если
+            /// ты хочешь адаптации под экран. Размерами экрана
+            /// вообще лучше не пользоваться, если на то нет
+            /// веской причины, от них куча проблем
+            // height: height - 500,
+            // width: width - 100,
             child: Column(
               children: [
                 Row(
